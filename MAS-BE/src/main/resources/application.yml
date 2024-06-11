@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: MAS-BE
+  datasource:
+    url: jdbc:postgresql://localhost:5432/mas-db
+    username: admin
+    password: admin
+  jpa:
+    hibernate:
+      ddl-auto: update
