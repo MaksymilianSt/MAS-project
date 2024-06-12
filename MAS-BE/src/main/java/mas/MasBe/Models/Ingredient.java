@@ -21,4 +21,9 @@ public class Ingredient {
 
     @ManyToMany
     private Set<IngredientShoppingList> ingredientShoppingLists;
+
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "recipe_id")
+    @NotNull()
+    private Recipe recipe;
 }

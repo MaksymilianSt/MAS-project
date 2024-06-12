@@ -17,11 +17,11 @@ public class RecipeLike {
     private LocalDateTime createdDate;
 
 
-    @ManyToOne()
+    @ManyToOne(optional = false)
     @JoinColumn(name = "app_user_id")
     private AppUser user;
 
-    @ManyToOne()
+    @ManyToOne(optional = false)
     @JoinColumn(name = "recipe_id")
     private Recipe recipe;
 }

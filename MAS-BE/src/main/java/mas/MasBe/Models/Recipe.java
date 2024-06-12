@@ -32,4 +32,7 @@ public class Recipe {
     @OneToMany(mappedBy = "recipe")
     Set<RecipeLike> likes;
 
+    @OneToMany(mappedBy = "recipe")
+    private Set<Ingredient> ingredients;
+
 }
