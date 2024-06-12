@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.Set;
 
@@ -21,6 +20,12 @@ public class AppUser extends  LoginData{
     @Transient
     public static int minAge = 18;
 
-    @OneToMany
+    @OneToMany(mappedBy = "user")
     private Set<Recipe> recipes;
+
+    @OneToMany(mappedBy = "user")
+    Set<Comment> comments;
+
+    @OneToMany(mappedBy = "user")
+    Set<RecipeLike> likes;
 }

@@ -2,6 +2,7 @@ package mas.MasBe.Models;
 
 import jakarta.annotation.Nullable;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.Null;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -17,7 +18,7 @@ public class Device {
     private int id;
     private String name;
     private String description;
-    @Nullable
+    @Null
     @Lob
     private byte [] image;
 
