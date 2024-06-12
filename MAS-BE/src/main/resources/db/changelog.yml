@@ -1,8 +1,0 @@
-databaseChangeLog:
-  - changeSet:
-      id: 1
-      author: Maks
-      changes:
-        - sqlFile:
-            path: sql/createTest.sql
-            relativeToChangelogFile: true

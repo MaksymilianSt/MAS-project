@@ -7,6 +7,5 @@ spring:
     password: admin
   jpa:
     hibernate:
-      ddl-auto: validate
-  liquibase:
-    change-log: classpath:/db/changelog.yml
+      ddl-auto: create-drop
+
