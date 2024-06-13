@@ -1,4 +1,4 @@
-package mas.MasBe.Models;
+package mas.MasBe.Model;
 
 import jakarta.persistence.MappedSuperclass;
 

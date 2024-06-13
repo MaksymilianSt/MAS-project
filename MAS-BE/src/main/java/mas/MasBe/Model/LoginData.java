@@ -1,10 +1,14 @@
-package mas.MasBe.Models;
+package mas.MasBe.Model;
 
 import jakarta.persistence.MappedSuperclass;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
+import lombok.Setter;
 
 @MappedSuperclass
+@Getter
+@Setter
 public abstract class LoginData {
     @Email
     @NotNull

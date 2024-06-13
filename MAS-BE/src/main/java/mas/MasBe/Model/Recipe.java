@@ -1,14 +1,19 @@
-package mas.MasBe.Models;
+package mas.MasBe.Model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 public class Recipe {
     @Id
@@ -22,17 +27,20 @@ public class Recipe {
     @NotNull
     private int timeToPrepareInMin;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @Transient
+    public static Set<Recipe> recipeExtesion = new HashSet<>();
+
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "app_user_id")
     private AppUser user;
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER)
     Set<Comment> comments;
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER)
     Set<RecipeLike> likes;
 
-    @OneToMany(mappedBy = "recipe")
+    @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER)
     private Set<Ingredient> ingredients;
 
 }

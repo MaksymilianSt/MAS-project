@@ -1,4 +1,4 @@
-package mas.MasBe.Models;
+package mas.MasBe.Model;
 
 public enum UserRoles {
     USER, ADMIN, SUPERADMIN
