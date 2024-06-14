@@ -14,7 +14,6 @@ import java.util.Set;
 @NoArgsConstructor
 public class Comment {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotNull
     private String text;
@@ -32,4 +31,24 @@ public class Comment {
     @JoinColumn(name = "recipe_id")
     @NotNull
     private Recipe recipe;
+
+    public Comment(AppUser user, Recipe recipe, String text){
+        this.setId(getNewId());
+        this.setUser(user);
+        this.setRecipe(recipe);
+        this.setText(text);
+        this.createdDate = LocalDateTime.now();
+
+        user.getComments().add(this);
+        recipe.getComments().add(this);
+
+        commentExtesion.add(this);
+    }
+
+    private int getNewId(){
+       return commentExtesion.stream()
+                .map(Comment::getId)
+                .max(Integer::compare)
+                .orElse(1);
+    }
 }

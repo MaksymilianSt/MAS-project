@@ -29,7 +29,7 @@ public class AppUser extends  LoginData{
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private Set<Recipe> recipes;
 
-    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
     Set<Comment> comments;
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)

@@ -1,12 +1,14 @@
 package mas.MasBe.Controller;
 
 import mas.MasBe.Dto.AppUserDTO;
+import mas.MasBe.Dto.IngredientDTO;
 import mas.MasBe.Dto.RecipeDTO;
 import mas.MasBe.Model.Recipe;
 import mas.MasBe.Repository.AppUserRepository;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/recipe")
@@ -23,13 +25,17 @@ public class RecipeController {
         return Recipe.recipeExtesion.stream()
                 .map(recipe -> {
                     var user = recipe.getUser();
+                    var ingredientDTOs = recipe.getIngredients().stream()
+                            .map(ing -> new IngredientDTO(ing.getId(), ing.getName(), ing.getQuantity()))
+                            .collect(Collectors.toSet());
                     return new RecipeDTO(
                             recipe.getId(),
                             new AppUserDTO(user.getId(), user.getEmail(), user.getPassword()),
                             recipe.getName(),
                             recipe.getDescription(),
                             recipe.getDifficultyLvl(),
-                            recipe.getTimeToPrepareInMin()
+                            recipe.getTimeToPrepareInMin(),
+                            ingredientDTOs
                     );
                 }).toList();
     }

@@ -22,7 +22,7 @@ public class Ingredient {
     @ManyToMany
     private Set<IngredientShoppingList> ingredientShoppingLists;
 
-    @ManyToOne(optional = false)
+    @ManyToOne(optional = false, fetch = FetchType.LAZY)
     @JoinColumn(name = "recipe_id")
     @NotNull()
     private Recipe recipe;
