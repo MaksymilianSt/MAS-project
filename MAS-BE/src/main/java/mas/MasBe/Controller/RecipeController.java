@@ -1,12 +1,9 @@
 package mas.MasBe.Controller;
 
-import mas.MasBe.Dto.AppUserDto;
-import mas.MasBe.Dto.RecipeDto;
+import mas.MasBe.Dto.AppUserDTO;
+import mas.MasBe.Dto.RecipeDTO;
 import mas.MasBe.Model.Recipe;
 import mas.MasBe.Repository.AppUserRepository;
-import mas.MasBe.Repository.RecipeRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Collection;
@@ -22,13 +19,13 @@ public class RecipeController {
         this.appUserRepository = appUserRepository;
     }
     @GetMapping
-    public Collection<RecipeDto> getAll() {
+    public Collection<RecipeDTO> getAll() {
         return Recipe.recipeExtesion.stream()
                 .map(recipe -> {
                     var user = recipe.getUser();
-                    return new RecipeDto(
+                    return new RecipeDTO(
                             recipe.getId(),
-                            new AppUserDto(user.getId(), user.getEmail(), user.getPassword()),
+                            new AppUserDTO(user.getId(), user.getEmail(), user.getPassword()),
                             recipe.getName(),
                             recipe.getDescription(),
                             recipe.getDifficultyLvl(),
@@ -38,7 +35,7 @@ public class RecipeController {
     }
 
     @PostMapping
-    public String save(@RequestBody RecipeDto recipeDto) {
+    public String save(@RequestBody RecipeDTO recipeDto) {
         Recipe newRecipe = new Recipe();
         newRecipe.setUser(appUserRepository.findById(recipeDto.user().id()).get());
         newRecipe.setName(recipeDto.name());

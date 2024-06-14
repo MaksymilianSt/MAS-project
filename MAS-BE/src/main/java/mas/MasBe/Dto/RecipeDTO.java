@@ -1,8 +1,8 @@
 package mas.MasBe.Dto;
 
-public record RecipeDto(
+public record RecipeDTO(
         int id,
-        AppUserDto user,
+        AppUserDTO user,
         String name,
         String description,
         int difficultyLvl,

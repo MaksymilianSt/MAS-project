@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Data
@@ -18,6 +20,8 @@ public class Comment {
     private String text;
     private LocalDateTime createdDate;
 
+    @Transient
+    public static Set<Comment> commentExtesion = new HashSet<>();
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "app_user_id")
