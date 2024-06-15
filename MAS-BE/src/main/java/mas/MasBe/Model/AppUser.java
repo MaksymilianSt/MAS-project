@@ -18,7 +18,11 @@ import java.util.Set;
 public class AppUser extends LoginData implements IdGenerateable<AppUser> {
     @Id
     private int id;
-    //private Set<UserRoles> roles;
+
+    @ElementCollection
+    @CollectionTable(name="roles", joinColumns=@JoinColumn(name="app_user_id"))
+    @Column(name="roles")
+    private Set<UserRoles> roles;
     private LocalDate dateOfBirth;
     @Transient
     public static int minAge = 18;
