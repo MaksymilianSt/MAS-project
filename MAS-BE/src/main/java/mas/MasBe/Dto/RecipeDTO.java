@@ -1,7 +1,5 @@
 package mas.MasBe.Dto;
 
-
-
 import java.util.Set;
 
 public record RecipeDTO(
@@ -12,6 +10,6 @@ public record RecipeDTO(
         int difficultyLvl,
         int timeToPrepareInMin,
         Set<IngredientDTO> ingredients
-        ) {
+) {
 
 }

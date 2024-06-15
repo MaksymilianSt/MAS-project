@@ -22,7 +22,7 @@ public class RecipeController {
     }
     @GetMapping
     public Collection<RecipeDTO> getAll() {
-        return Recipe.recipeExtesion.stream()
+        return Recipe.extension.stream()
                 .map(recipe -> {
                     var user = recipe.getUser();
                     var ingredientDTOs = recipe.getIngredients().stream()
@@ -48,7 +48,7 @@ public class RecipeController {
         newRecipe.setDescription(recipeDto.description());
         newRecipe.setDifficultyLvl(recipeDto.difficultyLvl());
         newRecipe.setTimeToPrepareInMin(recipeDto.timeToPrepareInMin());
-        Recipe.recipeExtesion.add(newRecipe);
+        Recipe.extension.add(newRecipe);
         return "git";
     }
 }

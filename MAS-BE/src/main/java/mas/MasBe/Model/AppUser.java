@@ -1,7 +1,7 @@
 package mas.MasBe.Model;
 
 import jakarta.persistence.*;
-import lombok.Data;
+
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -14,16 +14,15 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class AppUser extends  LoginData{
+public class AppUser extends  LoginData implements IdGenerateable<AppUser> {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     //private Set<UserRoles> roles;
     private Date dateOfBirth;
     @Transient
     public static int minAge = 18;
     @Transient
-    public static Set<AppUser> appUserExtesion = new HashSet<>();
+    public static Set<AppUser> extesion = new HashSet<>();
 
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
@@ -34,4 +33,9 @@ public class AppUser extends  LoginData{
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     Set<RecipeLike> likes;
+
+    @Override
+    public Set<AppUser> getExtension() {
+        return extesion;
+    }
 }

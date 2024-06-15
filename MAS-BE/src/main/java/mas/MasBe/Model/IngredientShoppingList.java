@@ -24,5 +24,14 @@ public class IngredientShoppingList extends ShoppingList implements DataAnalytic
 
     @ManyToMany
     private Set<Ingredient> ingredients;
+
+    public void addIngredient(Ingredient ingredient){
+        if(!ingredients.contains(ingredient)){
+            ingredients.add(ingredient);
+            ingredient.addIngredientShoppingList(this);
+        }
+    }
+    //constructor needs to have ingr cause 1..* relation, pousuwac @GenerationType.IDentioty na samo @ID
+
 }
 

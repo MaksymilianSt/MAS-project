@@ -12,7 +12,7 @@ import java.util.Set;
 @Entity
 @Data
 @NoArgsConstructor
-public class Comment {
+public class Comment implements IdGenerateable<Comment> {
     @Id
     private int id;
     @NotNull
@@ -20,7 +20,7 @@ public class Comment {
     private LocalDateTime createdDate;
 
     @Transient
-    public static Set<Comment> commentExtesion = new HashSet<>();
+    public static Set<Comment> extension = new HashSet<>();
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "app_user_id")
@@ -33,7 +33,7 @@ public class Comment {
     private Recipe recipe;
 
     public Comment(AppUser user, Recipe recipe, String text){
-        this.setId(getNewId());
+        this.setId(generateNewId());
         this.setUser(user);
         this.setRecipe(recipe);
         this.setText(text);
@@ -42,13 +42,12 @@ public class Comment {
         user.getComments().add(this);
         recipe.getComments().add(this);
 
-        commentExtesion.add(this);
+        extension.add(this);
     }
 
-    private int getNewId(){
-       return commentExtesion.stream()
-                .map(Comment::getId)
-                .max(Integer::compare)
-                .orElse(1);
+    @Override
+    public Set<Comment> getExtension() {
+        return extension;
     }
+
 }

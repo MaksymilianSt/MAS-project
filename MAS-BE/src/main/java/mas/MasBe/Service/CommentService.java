@@ -17,7 +17,7 @@ public class CommentService {
     public List<CommentReadDTO> getAllByRecipeId(int recipeId) {
         log.info("getting all comments for recipeId:" + recipeId);
 
-        var recipe = Recipe.recipeExtesion.stream()
+        var recipe = Recipe.extension.stream()
                 .filter(rec -> rec.getId() == recipeId)
                 .findFirst().orElseThrow(() -> new NoSuchElementException("there is no recipe with given id: " + recipeId));
 
@@ -33,7 +33,7 @@ public class CommentService {
     public List<CommentReadDTO> getAllByUserId(int userId) {
         log.info("getting all comments for userId:" + userId);
 
-        var user = AppUser.appUserExtesion.stream()
+        var user = AppUser.extesion.stream()
                 .filter(usr -> usr.getId() == userId)
                 .findFirst().orElseThrow(() -> new NoSuchElementException("there is no user with given id: " + userId));
 
@@ -47,11 +47,11 @@ public class CommentService {
     }
 
     public CommentReadDTO save(int userId, int recipeId, String text){
-        var user = AppUser.appUserExtesion.stream()
+        var user = AppUser.extesion.stream()
                 .filter(usr -> usr.getId() == userId)
                 .findFirst().orElseThrow(() -> new NoSuchElementException("there is no user with given id: " + userId));
 
-        var recipe = Recipe.recipeExtesion.stream()
+        var recipe = Recipe.extension.stream()
                 .filter(rec -> rec.getId() == recipeId)
                 .findFirst().orElseThrow(() -> new NoSuchElementException("there is no recipe with given id: " + recipeId));
 

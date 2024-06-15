@@ -26,4 +26,11 @@ public class Ingredient {
     @JoinColumn(name = "recipe_id")
     @NotNull()
     private Recipe recipe;
+
+    public void addIngredientShoppingList(IngredientShoppingList ingredientShoppingList){
+        if(!ingredientShoppingLists.contains(ingredientShoppingList)){
+            ingredientShoppingLists.add(ingredientShoppingList);
+            ingredientShoppingList.addIngredient(this);
+        }
+    }
 }

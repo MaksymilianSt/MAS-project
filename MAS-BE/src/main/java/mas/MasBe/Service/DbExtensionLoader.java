@@ -12,8 +12,6 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @Slf4j
 public class DbExtensionLoader {
@@ -35,9 +33,9 @@ public class DbExtensionLoader {
 
     @EventListener(ApplicationReadyEvent.class)
     public void loadData() {
-        Recipe.recipeExtesion.addAll(recipeRepository.findAll());
-        AppUser.appUserExtesion.addAll(appUserRepository.findAll());
-        Comment.commentExtesion.addAll(commentRepository.findAll());
+        Recipe.extension.addAll(recipeRepository.findAll());
+        AppUser.extesion.addAll(appUserRepository.findAll());
+        Comment.extension.addAll(commentRepository.findAll());
 
         log.info("data has been loaded");
 
@@ -45,9 +43,9 @@ public class DbExtensionLoader {
 
     @PreDestroy
     public void saveData() {
-        appUserRepository.saveAll(AppUser.appUserExtesion);
-        recipeRepository.saveAll(Recipe.recipeExtesion);
-        commentRepository.saveAll(Comment.commentExtesion);
+        appUserRepository.saveAll(AppUser.extesion);
+        recipeRepository.saveAll(Recipe.extension);
+        commentRepository.saveAll(Comment.extension);
         log.info("data has been saved");
 
     }

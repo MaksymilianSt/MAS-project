@@ -1,9 +1,7 @@
 package mas.MasBe.Model;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -15,7 +13,7 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class Recipe {
+public class Recipe implements IdGenerateable<Recipe> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
@@ -28,7 +26,7 @@ public class Recipe {
     private int timeToPrepareInMin;
 
     @Transient
-    public static Set<Recipe> recipeExtesion = new HashSet<>();
+    public static Set<Recipe> extension = new HashSet<>();
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "app_user_id")
@@ -43,4 +41,9 @@ public class Recipe {
     @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER)
     private Set<Ingredient> ingredients;
 
+
+    @Override
+    public Set<Recipe> getExtension() {
+        return extension;
+    }
 }
