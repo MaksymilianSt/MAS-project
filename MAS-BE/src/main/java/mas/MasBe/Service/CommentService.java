@@ -46,7 +46,7 @@ public class CommentService {
                 .toList();
     }
 
-    public CommentReadDTO save(int userId, int recipeId, String text){
+    public CommentReadDTO save(int userId, int recipeId, String text) {
         var user = AppUser.extesion.stream()
                 .filter(usr -> usr.getId() == userId)
                 .findFirst().orElseThrow(() -> new NoSuchElementException("there is no user with given id: " + userId));
@@ -55,7 +55,7 @@ public class CommentService {
                 .filter(rec -> rec.getId() == recipeId)
                 .findFirst().orElseThrow(() -> new NoSuchElementException("there is no recipe with given id: " + recipeId));
 
-        Comment comment = new Comment(user, recipe, text);
+        Comment comment = Comment.createComment(user, recipe, text);
         return new CommentReadDTO(comment.getId(), comment.getText(), comment.getCreatedDate());
     }
 }

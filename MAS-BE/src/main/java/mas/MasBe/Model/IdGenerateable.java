@@ -1,10 +1,11 @@
 package mas.MasBe.Model;
 
-import java.util.Collection;
+
 import java.util.Set;
 
-public interface IdGenerateable <T extends IdGenerateable> {
+public interface IdGenerateable<T extends IdGenerateable> {
     int getId();
+
     Set<T> getExtension();
 
     default int generateNewId() {

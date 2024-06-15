@@ -27,7 +27,7 @@ public class DbExtensionLoader {
             CommentRepository commentRepository
     ) {
         this.recipeRepository = recipeRepository;
-        this.appUserRepository= appUserRepository;
+        this.appUserRepository = appUserRepository;
         this.commentRepository = commentRepository;
     }
 
@@ -37,14 +37,10 @@ public class DbExtensionLoader {
         AppUser.extesion.addAll(appUserRepository.findAll());
         Comment.extension.addAll(commentRepository.findAll());
 
-        log.info("data has been loaded");
-
     }
 
     @PreDestroy
     public void saveData() {
-        appUserRepository.saveAll(AppUser.extesion);
-        recipeRepository.saveAll(Recipe.extension);
         commentRepository.saveAll(Comment.extension);
         log.info("data has been saved");
 

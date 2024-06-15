@@ -15,7 +15,6 @@ import java.util.Set;
 @NoArgsConstructor
 public class Recipe implements IdGenerateable<Recipe> {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotNull
     private String name;
@@ -33,7 +32,7 @@ public class Recipe implements IdGenerateable<Recipe> {
     private AppUser user;
 
     @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER)
-    Set<Comment> comments;
+    Set<Comment> comments = new HashSet<>();
 
     @OneToMany(mappedBy = "recipe", fetch = FetchType.EAGER)
     Set<RecipeLike> likes;
@@ -45,5 +44,37 @@ public class Recipe implements IdGenerateable<Recipe> {
     @Override
     public Set<Recipe> getExtension() {
         return extension;
+    }
+
+    public void addIngredient(Ingredient ingredient) {
+        if (!ingredients.contains(ingredient)) {
+            ingredients.add(ingredient);
+            ingredient.addRecipe(this);
+        }
+    }
+
+    public void addUser(AppUser user) {
+        this.user = user;
+        user.addRecipe(this);
+    }
+
+    public static Recipe createIngredient(String name, String description, int difficultyLvl, int timeToPrepareInMin, AppUser user) {
+        // ik but, hibernate needs public constructor :((
+        if (name == null || name.isEmpty() || user == null) {
+            throw new IllegalArgumentException("cannot create Recipe without user");
+        }
+
+        Recipe created = new Recipe();
+        created.setId(created.generateNewId());
+        created.setName(name);
+        created.setDescription(description);
+        created.setDifficultyLvl(difficultyLvl);
+        created.setTimeToPrepareInMin(timeToPrepareInMin);
+
+        created.addUser(user);
+
+        extension.add(created);
+
+        return created;
     }
 }

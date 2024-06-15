@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+import java.util.HashSet;
+import java.util.Optional;
 import java.util.Set;
 
 @Entity
@@ -13,16 +15,31 @@ import java.util.Set;
 @NoArgsConstructor
 public class Device {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String description;
     @Null
     @Lob
-    private byte [] image;
+    private byte[] image;
+    @Transient
+    public static Set<Device> extension = new HashSet<>();
 
     @ManyToMany
     private Set<DeviceShoppingList> deviceShoppingLists;
 
+    public Optional<byte[]> getImage() {
+        return Optional.ofNullable(image);
+    }
+
+    public static void displayAllDevices() {
+        extension.forEach(System.out::println);
+    }
+
+    public void addShoppingList(DeviceShoppingList deviceShoppingList) {
+        if (!deviceShoppingLists.contains(deviceShoppingList)) {
+            deviceShoppingLists.add(deviceShoppingList);
+            deviceShoppingList.addDevice(this);
+        }
+    }
 }
 

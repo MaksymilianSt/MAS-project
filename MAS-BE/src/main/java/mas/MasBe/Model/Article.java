@@ -1,22 +1,20 @@
 package mas.MasBe.Model;
 
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Entity
 @Data
 @NoArgsConstructor
-public class Article implements DataAnalytics{
+public class Article implements DataAnalytics {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotNull
     private String title;
@@ -27,5 +25,11 @@ public class Article implements DataAnalytics{
     @NotNull
     private LocalDateTime createdDate;
     private LocalDateTime updatedDate;
+
+    public static Set<Article> extension;
+
+    public void displayAllArticles() {
+        extension.forEach(System.out::println);
+    }
 
 }

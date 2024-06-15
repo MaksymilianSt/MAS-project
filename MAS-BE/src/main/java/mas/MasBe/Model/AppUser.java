@@ -6,7 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.Period;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -14,11 +15,11 @@ import java.util.Set;
 @Getter
 @Setter
 @NoArgsConstructor
-public class AppUser extends  LoginData implements IdGenerateable<AppUser> {
+public class AppUser extends LoginData implements IdGenerateable<AppUser> {
     @Id
     private int id;
     //private Set<UserRoles> roles;
-    private Date dateOfBirth;
+    private LocalDate dateOfBirth;
     @Transient
     public static int minAge = 18;
     @Transient
@@ -38,4 +39,16 @@ public class AppUser extends  LoginData implements IdGenerateable<AppUser> {
     public Set<AppUser> getExtension() {
         return extesion;
     }
+
+    public void addRecipe(Recipe recipe) {
+        if (!recipes.contains(recipe)) {
+            recipes.add(recipe);
+            recipe.addUser(this);
+        }
+    }
+
+    public int getAge() {
+        return Period.between(LocalDate.now(), dateOfBirth).getYears();
+    }
+
 }

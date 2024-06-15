@@ -7,6 +7,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
+import java.util.Objects;
 import java.util.Set;
 
 @Entity
@@ -32,22 +33,27 @@ public class Comment implements IdGenerateable<Comment> {
     @NotNull
     private Recipe recipe;
 
-    public Comment(AppUser user, Recipe recipe, String text){
-        this.setId(generateNewId());
-        this.setUser(user);
-        this.setRecipe(recipe);
-        this.setText(text);
-        this.createdDate = LocalDateTime.now();
+    public static Comment createComment(AppUser user, Recipe recipe, String text) {
+        if (Objects.isNull(user) || Objects.isNull(recipe)) {
+            throw new IllegalArgumentException("user or recipe cannot be null");
+        }
+        Comment created = new Comment();
+        created.setId(created.generateNewId());
+        created.setText(text);
+        created.setCreatedDate(LocalDateTime.now());
+        created.setRecipe(recipe);
+        created.setUser(user);
 
-        user.getComments().add(this);
-        recipe.getComments().add(this);
+        user.getComments().add(created);
+        recipe.getComments().add(created);
 
-        extension.add(this);
+        extension.add(created);
+
+        return created;
     }
 
     @Override
     public Set<Comment> getExtension() {
         return extension;
     }
-
 }
