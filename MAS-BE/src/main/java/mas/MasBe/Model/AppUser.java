@@ -19,10 +19,10 @@ public class AppUser extends LoginData implements IdGenerateable<AppUser> {
     @Id
     private int id;
 
-    @ElementCollection
+    @ElementCollection(fetch = FetchType.EAGER)
     @CollectionTable(name="roles", joinColumns=@JoinColumn(name="app_user_id"))
     @Column(name="roles")
-    private Set<UserRoles> roles;
+    private Set<UserRoles> roles = new HashSet<>();
     private LocalDate dateOfBirth;
     @Transient
     public static int minAge = 18;
