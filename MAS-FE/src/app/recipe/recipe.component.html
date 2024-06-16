@@ -1,0 +1,27 @@
+<div class="container">
+  <h1 class="accordion-header ">Recipes</h1> <hr>
+  <div class="row" *ngFor="let recipe of recipes; let id = index ">
+    <div class="col-xl-12" >
+      <ul class="list-group ">
+        <li class="list-group-item" style="margin: 12px">
+          <div class="row">
+            <h3 style="text-align: center" > {{recipe.name}}</h3>
+            <p>timeToPrepare: {{recipe.timeToPrepareInMin}}</p>
+            <p>diffLvl: {{recipe.difficultyLvl}}</p>
+            <hr>
+            <div class="col-xl-6">
+              <h5>description:</h5>
+              <p>{{recipe.description}}</p>
+            </div>
+            <div class="col-xl-6">
+              <app-ingredient [ingredients]="recipe.ingredients" ></app-ingredient>
+            </div>
+            <app-comment [comments]="recipe.comments" (newCommentEmitter)="addNewComment($event, id)" ></app-comment>
+          </div>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+

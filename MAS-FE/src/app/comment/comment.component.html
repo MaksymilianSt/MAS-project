@@ -1,0 +1,28 @@
+<div class="container">
+  <h4> comments: </h4>
+  <ul class="list-group">
+    <div class="row">
+      <li class="list-group-item" *ngFor="let comment of comments">
+        <div class="row">
+          <div class="col-xl-4">
+            <p><b>{{ comment.authorEmail }}</b></p>
+            <p>{{ comment.createdDate | date: 'dd/MM/yyyy hh:mm ' }} </p>
+          </div>
+          <div class="col-xl-8">
+            <p>{{ comment.text }}</p>
+          </div>
+        </div>
+      </li>
+    </div>
+  </ul>
+ <br>
+  <div class="row">
+    <div class="col-xl-10">
+      <input type="text" id="userInput" class="form-control" [(ngModel)]="newCommentText"/>
+    </div>
+    <div class="col-xl-2">
+      <button class="btn btn-primary mt-2" (click)="onAddNewUser()">Add new comment</button>
+    </div>
+  </div>
+
+</div>

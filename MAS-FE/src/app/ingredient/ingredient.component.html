@@ -1,0 +1,24 @@
+<div class="container">
+  <h5>Ingredients:</h5>
+  <ul class="list-group">
+    <div class="row">
+      <div class="col-xl-8">
+        <h6>name</h6>
+      </div>
+      <div class="col-xl-4">
+        <h6>quantity</h6>
+      </div>
+    </div>
+    <li class="list-group-item" *ngFor="let ingredient of ingredients">
+      <div class="row">
+        <div class="col-xl-9">
+          <p>{{ingredient.name}} </p>
+        </div>
+        <div class="col-xl-3">
+          <p>{{ingredient.quantity}}</p>
+        </div>
+      </div>
+    </li>
+
+  </ul>
+</div>
