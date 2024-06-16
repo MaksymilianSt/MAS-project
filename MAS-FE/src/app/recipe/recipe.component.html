@@ -1,13 +1,25 @@
 <div class="container">
-  <h1 class="accordion-header ">Recipes</h1> <hr>
+  <div class="row">
+    <div class="col-xl-9">
+      <h1 class="accordion-header ">Recipes</h1>
+    </div>
+    <div class="col-xl-2">
+      <p> {{userService.loggedInUser?.email}}</p>
+
+    </div>
+    <div class="col-xl-1">
+      <button (click)="logout()" class="btn btn-danger">Logout</button>
+    </div>
+  </div>
+  <hr>
   <div class="row" *ngFor="let recipe of recipes; let id = index ">
     <div class="col-xl-12" >
       <ul class="list-group ">
         <li class="list-group-item" style="margin: 12px">
           <div class="row">
             <h3 style="text-align: center" > {{recipe.name}}</h3>
-            <p>timeToPrepare: {{recipe.timeToPrepareInMin}}</p>
-            <p>diffLvl: {{recipe.difficultyLvl}}</p>
+            <p>timeToPrepare: {{recipe.timeToPrepareInMin}} min</p>
+            <p>difficultyLvl: {{ recipe.difficultyLvl}}</p>
             <hr>
             <div class="col-xl-6">
               <h5>description:</h5>

@@ -13,7 +13,6 @@ export class UserService {
   loggedInUser: AppUser | null = null;
 
   constructor(private httpClient: HttpClient) {
-
   }
 
   login(email: string, password: string):Observable<AppUser> {

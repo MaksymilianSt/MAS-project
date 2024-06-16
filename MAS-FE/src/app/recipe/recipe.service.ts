@@ -17,8 +17,8 @@ export class RecipeService {
     return this.httpClient.get<Recipe[]>("http://localhost:8080/recipe");
   }
 
-  addComment(text: string, recipeId: number){
-     let userId = 1;
+  addComment(text: string, userId: number, recipeId: number){
+
     return this.httpClient.post<Comment>("http://localhost:8080/user/"+ userId + "/" + "recipe/" + recipeId + "/comment", text);
   }
 
