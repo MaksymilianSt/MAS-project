@@ -34,7 +34,8 @@ public class RecipeController {
                             .map(com -> new CommentReadDTO(
                                     com.getId(),
                                     com.getText(),
-                                    com.getCreatedDate()
+                                    com.getCreatedDate(),
+                                    user.getEmail()
                             )).collect(Collectors.toSet());
 
                     return new RecipeDTO(

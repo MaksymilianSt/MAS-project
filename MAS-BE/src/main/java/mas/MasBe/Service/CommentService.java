@@ -25,7 +25,8 @@ public class CommentService {
                 .map(com -> new CommentReadDTO(
                         com.getId(),
                         com.getText(),
-                        com.getCreatedDate()
+                        com.getCreatedDate(),
+                        com.getUser().getEmail()
                 ))
                 .toList();
     }
@@ -41,7 +42,8 @@ public class CommentService {
                 .map(com -> new CommentReadDTO(
                         com.getId(),
                         com.getText(),
-                        com.getCreatedDate()
+                        com.getCreatedDate(),
+                        user.getEmail()
                 ))
                 .toList();
     }
@@ -56,6 +58,6 @@ public class CommentService {
                 .findFirst().orElseThrow(() -> new NoSuchElementException("there is no recipe with given id: " + recipeId));
 
         Comment comment = Comment.createComment(user, recipe, text);
-        return new CommentReadDTO(comment.getId(), comment.getText(), comment.getCreatedDate());
+        return new CommentReadDTO(comment.getId(), comment.getText(), comment.getCreatedDate(), user.getEmail());
     }
 }
