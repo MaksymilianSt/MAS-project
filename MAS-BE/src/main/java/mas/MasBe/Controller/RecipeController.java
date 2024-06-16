@@ -1,6 +1,7 @@
 package mas.MasBe.Controller;
 
 import mas.MasBe.Dto.AppUserDTO;
+import mas.MasBe.Dto.CommentReadDTO;
 import mas.MasBe.Dto.IngredientDTO;
 import mas.MasBe.Dto.RecipeDTO;
 import mas.MasBe.Model.Recipe;
@@ -28,6 +29,14 @@ public class RecipeController {
                     var ingredientDTOs = recipe.getIngredients().stream()
                             .map(ing -> new IngredientDTO(ing.getId(), ing.getName(), ing.getQuantity()))
                             .collect(Collectors.toSet());
+
+                    var comments = recipe.getComments().stream()
+                            .map(com -> new CommentReadDTO(
+                                    com.getId(),
+                                    com.getText(),
+                                    com.getCreatedDate()
+                            )).collect(Collectors.toSet());
+
                     return new RecipeDTO(
                             recipe.getId(),
                             new AppUserDTO(user.getId(), user.getEmail(), user.getPassword()),
@@ -35,20 +44,10 @@ public class RecipeController {
                             recipe.getDescription(),
                             recipe.getDifficultyLvl(),
                             recipe.getTimeToPrepareInMin(),
-                            ingredientDTOs
+                            ingredientDTOs,
+                            comments
                     );
                 }).toList();
     }
 
-    @PostMapping
-    public String save(@RequestBody RecipeDTO recipeDto) {
-        Recipe newRecipe = new Recipe();
-        newRecipe.setUser(appUserRepository.findById(recipeDto.user().id()).get());
-        newRecipe.setName(recipeDto.name());
-        newRecipe.setDescription(recipeDto.description());
-        newRecipe.setDifficultyLvl(recipeDto.difficultyLvl());
-        newRecipe.setTimeToPrepareInMin(recipeDto.timeToPrepareInMin());
-        Recipe.extension.add(newRecipe);
-        return "git";
-    }
 }

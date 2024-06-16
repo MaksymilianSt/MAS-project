@@ -9,7 +9,8 @@ public record RecipeDTO(
         String description,
         int difficultyLvl,
         int timeToPrepareInMin,
-        Set<IngredientDTO> ingredients
+        Set<IngredientDTO> ingredients,
+        Set<CommentReadDTO> comments
 ) {
 
 }
