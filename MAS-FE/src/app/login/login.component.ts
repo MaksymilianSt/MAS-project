@@ -1,13 +1,13 @@
 import { Component } from '@angular/core';
 import {FormBuilder, FormGroup, ReactiveFormsModule, Validators} from "@angular/forms";
 import {UserService} from "./UserService";
-import {NgIf} from "@angular/common";
+import {NgIf, NgStyle} from "@angular/common";
 import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [ReactiveFormsModule, NgIf],
+  imports: [ReactiveFormsModule, NgIf, NgStyle],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })
@@ -32,7 +32,7 @@ export class LoginComponent {
          this.error = null;
          this.router.navigate(['/recipe'])
          console.log(usr);
-       }, error => this.error = error.messageerror);
+       }, error => this.error = error.error);
   }
 
 }

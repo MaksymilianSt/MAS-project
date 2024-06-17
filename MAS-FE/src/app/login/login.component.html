@@ -1,6 +1,6 @@
 <div class="container mt-4">
   <h2>Login</h2>
-  <p *ngIf="!error"> {{error}}</p>
+  <p *ngIf="error !== null" [ngStyle]="{'color':'red'}" > {{error}}</p>
   <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label for="email">Email:</label>

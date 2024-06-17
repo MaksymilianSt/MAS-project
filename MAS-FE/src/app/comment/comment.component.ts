@@ -23,8 +23,7 @@ export class CommentComponent {
   // @ts-ignore
   newCommentText:string = '';
 
-  onAddNewUser(){
-    //service current user
+  onAddNewComment(){
     this.newCommentEmitter.emit(this.newCommentText);
     this.newCommentText = '';
   }
